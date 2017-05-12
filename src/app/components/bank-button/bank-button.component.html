@@ -1,0 +1,4 @@
+<button class="btn btn-warning" (click)="toggleBanking()">Bank
+    <span *ngIf="!battleEngine.banking">(Space)</span>
+    <span *ngIf="battleEngine.banking">{{ battleEngine.bankCountdown.toFixed(0) }}</span>
+</button>

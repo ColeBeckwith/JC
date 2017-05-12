@@ -1,0 +1,14 @@
+:host {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  cursor: crosshair;
+}
+
+.game-container {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+}

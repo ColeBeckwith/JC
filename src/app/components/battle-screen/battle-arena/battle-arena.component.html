@@ -1,0 +1,13 @@
+<div class="game-container">
+    <jcx-player-battle-avatar></jcx-player-battle-avatar>
+    <jcx-projectile *ngFor="let projectile of projectilesService.projectiles"
+                    [projectile]="projectile">
+
+    </jcx-projectile>
+    <jcx-enemy-battle-avatar *ngFor="let enemy of enemiesService.enemies" [enemy]="enemy"></jcx-enemy-battle-avatar>
+</div>
+
+<jcx-player-battle-hub></jcx-player-battle-hub>
+<jcx-upgrade-menu></jcx-upgrade-menu>
+<jcx-powerup-menu></jcx-powerup-menu>
+<jcx-arena-hub-bottom-container></jcx-arena-hub-bottom-container>

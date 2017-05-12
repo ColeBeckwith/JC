@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+
+html {
+  font-family: 'Century Gothic', 'Arial Rounded MT Bold', sans-serif;
+}
+
+p {
+  font-family: 'Century Gothic', 'Arial Rounded MT Bold', sans-serif;
+  margin: 2px 0;
+}
+
+button {
+  outline: none;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.small-text {
+  font-size: 80%;
+}
+
+.extra-small-text {
+  font-size: 60%;
+}

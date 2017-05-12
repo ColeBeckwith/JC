@@ -1,0 +1,22 @@
+:host {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  left: -11px;
+  top: -11px;
+  border-radius: 50%;
+  border-style: solid;
+  box-sizing: border-box;
+  animation-name: glowing-shield;
+  animation-duration: 2.8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes glowing-shield {
+  0% {border-color: #87CEFA}
+  25% {border-color: #30d5C8}
+  50% {border-color: #98FF98}
+  75% {border-color: #30d5C8}
+  100% {border-color: #87CEFA}
+}

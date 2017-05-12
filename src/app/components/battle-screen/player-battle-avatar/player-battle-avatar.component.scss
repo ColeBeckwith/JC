@@ -1,0 +1,12 @@
+:host {
+  position: absolute;
+}
+
+.player-avatar {
+  background-color: white;
+  position: absolute;
+  border: 1px solid gold;
+  border-radius: 50%;
+  box-sizing: border-box;
+  z-index: 1000;
+}

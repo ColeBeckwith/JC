@@ -1,0 +1,20 @@
+<p class="faith-color">Faith-Based Upgrades</p>
+
+<div class="btn-group-vertical">
+    <button type="button"
+            class="btn btn-default faith-btn"
+            *ngFor="let upgrade of upgradesService.playerUpgrades"
+            [disabled]="upgrade.cost > playerStats.player.currency.faith"
+            (click)="upgrade.upgradeFn(upgrade)">
+        <p>
+            {{ upgrade.displayName }} Lvl. {{ upgrade.level }}
+        </p>
+        <p class="extra-small-text">
+            {{ upgrade.description }} ({{ upgrade.keyboardShortcut}})
+        </p>
+        <p class="extra-small-text">
+            Faith Cost: {{ upgrade.cost }}
+        </p>
+    </button>
+</div>
+

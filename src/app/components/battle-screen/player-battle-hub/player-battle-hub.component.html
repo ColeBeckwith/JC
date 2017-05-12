@@ -1,0 +1,39 @@
+<div *ngIf="playerStats.player">
+
+    <ng2-kw-gauge class="hub-gauge"
+                  [bgColor]='"None"'
+                  [rounded]=true
+                  [animationSecs]=1
+                  [labels]="[healthPercentageLabel, healthNameLabel]"
+                  [segments]=[healthSegment]>
+    </ng2-kw-gauge>
+    <ng2-kw-gauge class="hub-gauge"
+                  [bgColor]='"None"'
+                  [rounded]=true
+                  [animationSecs]=1
+                  [labels]="[shieldPercentageLabel, shieldNameLabel]"
+                  [segments]=[shieldSegment]>
+    </ng2-kw-gauge>
+    <ng2-kw-gauge class="hub-gauge"
+                  [bgColor]='"None"'
+                  [rounded]=true
+                  [animationSecs]=1
+                  [labels]="[comboLabel, comboNameLabel]"
+                  [segments]=[comboSegment]>
+    </ng2-kw-gauge>
+    <ng2-kw-gauge class="hub-gauge"
+                  [bgColor]='"None"'
+                  [rounded]=true
+                  [animationSecs]=1
+                  [labels]="[pointsLabel, pointsNameLabel]"
+                  [segments]=[pointsSegment]>
+    </ng2-kw-gauge>
+    <ng2-kw-gauge class="hub-gauge"
+                  [bgColor]='"None"'
+                  [rounded]=true
+                  [animationSecs]=1
+                  [labels]="[faithLabel, faithNameLabel]"
+                  [segments]=[faithSegment]>
+    </ng2-kw-gauge>
+</div>
+
