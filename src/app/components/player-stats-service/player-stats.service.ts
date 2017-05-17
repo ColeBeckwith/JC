@@ -45,7 +45,7 @@ export class PlayerStatsService {
         },
         currency: {
             points: 0,
-            faith: 20,
+            faith: 0,
             combo: 1,
             comboMinimum: 1,
             comboDecayPerSecond: .1,

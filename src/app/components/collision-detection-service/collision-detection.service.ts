@@ -53,6 +53,19 @@ export class CollisionDetectionService {
             }
         });
 
+        for (let i = 0; i < enemies.length; i++) {
+            for (let j = i + 1; j < enemies.length; j++) {
+                let distance = this.distanceBetween(enemies[i].location, enemies[j].location);
+                if (distance < enemies[i].dimensions.radius + enemies[j].dimensions.radius) {
+                    this.enemyEnemyCollision(enemies[i], enemies[j]);
+                }
+            }
+        }
+
+    }
+
+    enemyEnemyCollision(enemy1, enemy2) {
+
     }
 
     enemyProjectileCollision(enemy: Enemy, projectile: Projectile, projectileIndex: number) {

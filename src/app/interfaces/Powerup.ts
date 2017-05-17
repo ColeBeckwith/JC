@@ -9,4 +9,7 @@ export interface Powerup {
     displayName: string;
     cost: number;
     level: number;
+    duration: number;
+    timeRemaining: number;
+    active: boolean;
 }

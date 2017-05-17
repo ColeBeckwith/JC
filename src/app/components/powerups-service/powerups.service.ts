@@ -15,7 +15,10 @@ export class PowerupsService {
             keyboardShortcut: '1',
             useFn: (powerup) => this.usePulseBomb(powerup),
             totalUses: 0,
-            level: 1
+            level: 1,
+            duration: 0,
+            timeRemaining: 0,
+            active: false
         },
         {
             initialUses: 3,
@@ -27,7 +30,10 @@ export class PowerupsService {
             keyboardShortcut: '2',
             useFn: (powerup) => this.useComboBurst(powerup),
             totalUses: 0,
-            level: 1
+            level: 1,
+            duration: 10,
+            timeRemaining: 0,
+            active: false
         },
         {
             initialUses: 3,
@@ -39,11 +45,22 @@ export class PowerupsService {
             keyboardShortcut: '3',
             useFn: (powerup) => this.useRapidFire(powerup),
             totalUses: 0,
-            level: 1
+            level: 1,
+            duration: 10,
+            timeRemaining: 0,
+            active: false
         }
     ];
 
     constructor(private playerStats: PlayerStatsService) {
+    }
+
+    triggerPowerupByShortcut(shortcut) {
+        this.powerups.forEach((powerup) => {
+            if (powerup.keyboardShortcut === shortcut) {
+                powerup.useFn(powerup);
+            }
+        })
     }
 
     initializePowerups() {
@@ -58,6 +75,7 @@ export class PowerupsService {
         }
 
         powerup.cost = powerup.cost * 2.8;
+        powerup.active = true;
         powerup.remainingUses--;
         powerup.totalUses++;
     }
@@ -68,6 +86,7 @@ export class PowerupsService {
         }
 
         powerup.cost = powerup.cost * 2.8;
+        powerup.active = true;
         powerup.remainingUses--;
         powerup.totalUses++;
     }
@@ -77,7 +96,9 @@ export class PowerupsService {
             return;
         }
 
+
         powerup.cost = powerup.cost * 2.8;
+        powerup.active = true;
         powerup.remainingUses--;
         powerup.totalUses++;
     }

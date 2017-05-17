@@ -37,11 +37,20 @@ export class UpgradesService {
     constructor(private playerStats: PlayerStatsService) {
     }
 
+    triggerUpgradeByShortcut(shortcut) {
+        this.playerUpgrades.forEach((upgrade) => {
+            if (upgrade.keyboardShortcut === shortcut) {
+                upgrade.upgradeFn(upgrade);
+            }
+        })
+    }
+
     bulletSpeedUpgrade(upgrade) {
         if (this.playerStats.player.currency.faith < upgrade.cost) {
             return;
         }
         this.playerStats.player.currency.faith -= upgrade.cost;
+        this.playerStats.player.primaryProjectile.cooldown *= .85;
         upgrade.level++;
         upgrade.cost = upgrade.cost * 2.3;
     }
@@ -51,6 +60,8 @@ export class UpgradesService {
             return;
         }
         this.playerStats.player.currency.faith -= upgrade.cost;
+        this.playerStats.player.shield.maxDurability += 10;
+        this.playerStats.player.shield.durability = this.playerStats.player.shield.maxDurability;
         upgrade.level++;
         upgrade.cost = upgrade.cost * 2.3;
 
@@ -61,6 +72,9 @@ export class UpgradesService {
             return;
         }
         this.playerStats.player.currency.faith -= upgrade.cost;
+
+        this.playerStats.player.maxHealth += 50;
+        this.playerStats.player.health = this.playerStats.player.maxHealth;
         upgrade.level++;
         upgrade.cost = upgrade.cost * 2.3;
 
