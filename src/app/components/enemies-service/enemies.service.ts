@@ -10,6 +10,8 @@ export class EnemiesService {
     enemies: Array<Enemy> = [];
     enemyCountdown = 0;
     difficultyLevel = 0;
+    averageEnemiesPerSecond = 1;
+    maxEnemiesAtOnce = 10;
 
     constructor(private projectilesService: ProjectilesService,
                 private battleArenaService: BattleArenaService) {
@@ -19,6 +21,8 @@ export class EnemiesService {
         this.enemies = [];
         this.enemyCountdown = 0;
         this.difficultyLevel = 0;
+        this.averageEnemiesPerSecond = 1;
+        this.maxEnemiesAtOnce = 10;
     }
 
     processStep(fps, playerLocation) {
@@ -74,8 +78,12 @@ export class EnemiesService {
 
 
     rollForEnemies(fps) {
-        let averageEnemiesAddedPerSecond = .2;
-        this.enemyCountdown += Math.random() * 2 * averageEnemiesAddedPerSecond / fps;
+        if (this.enemies.length >= this.maxEnemiesAtOnce) {
+            // Don't want to continue the countdown because if you wipe out the enemy, the max number will spawn almost
+            // immediately.
+            return;
+        }
+        this.enemyCountdown += Math.random() * 2 * this.averageEnemiesPerSecond / fps;
 
         if (this.enemyCountdown >= 1) {
             this.addRandomEnemy();
@@ -91,12 +99,13 @@ export class EnemiesService {
             acceleration: (Math.random() * (maxAcceleration - minAcceleration)) + minAcceleration,
             location: this.getRandomLocationOutsideArena(),
             health: 20,
+            maxHealth: 20,
             pointsAwarded: 10,
             comboBoost: .5,
             dimensions: {
-                height: 20,
-                width: 20,
-                radius: 10
+                height: 24,
+                width: 24,
+                radius: 12
             },
             projectiles: [
                 {
@@ -140,8 +149,8 @@ export class EnemiesService {
             xCoordinate = Math.floor(Math.random() * this.battleArenaService.battleArena.width);
         }
 
-        let maxPossibleMaxVelocity = 120;
-        let minPossibleMaxVelocity = 40;
+        let maxPossibleMaxVelocity = 140;
+        let minPossibleMaxVelocity = 60;
         let maxVelocity = (Math.random() * (maxPossibleMaxVelocity - minPossibleMaxVelocity)) + minPossibleMaxVelocity;
 
         return {

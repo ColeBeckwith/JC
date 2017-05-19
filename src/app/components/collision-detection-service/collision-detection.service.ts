@@ -5,6 +5,7 @@ import {ProjectilesService} from "../projectiles-service/projectiles.service";
 import {Enemy} from "../../interfaces/Enemy";
 import {EnemiesService} from "../enemies-service/enemies.service";
 import {Player} from "../../interfaces/Player";
+import {Bomb} from "../../interfaces/Bomb";
 
 @Injectable()
 export class CollisionDetectionService {
@@ -14,7 +15,7 @@ export class CollisionDetectionService {
     }
 
 
-    detectCollisions(fps, player, enemies, projectiles) {
+    detectCollisions(fps, player, enemies, projectiles, bombs) {
         // 1. Check all enemies and projectiles against shield.
         // 2. Check player against enemies and projectiles,
         // 3. Check enemies against all projectiles.
@@ -57,15 +58,56 @@ export class CollisionDetectionService {
             for (let j = i + 1; j < enemies.length; j++) {
                 let distance = this.distanceBetween(enemies[i].location, enemies[j].location);
                 if (distance < enemies[i].dimensions.radius + enemies[j].dimensions.radius) {
-                    this.enemyEnemyCollision(enemies[i], enemies[j]);
+                    this.enemyEnemyCollision(enemies[i], enemies[j], fps);
                 }
             }
         }
 
+        bombs.forEach((bomb: Bomb) => {
+            projectiles.forEach((projectile: Projectile, index) => {
+                if (bomb.friendly !== projectile.friendly) {
+                    let distanceBetween = this.distanceBetween(bomb.origin, projectile.location);
+                    if (distanceBetween < projectile.dimensions.radius + bomb.outerRadius && distanceBetween > bomb.innerRadius - projectile.dimensions.radius) {
+                        this.projectilesService.destroyProjectileByIndex(index);
+                    }
+                }
+            });
+
+            enemies.forEach((enemy: Enemy) => {
+                let distanceBetween = this.distanceBetween(bomb.origin, enemy.location);
+                if (distanceBetween < enemy.dimensions.radius + bomb.outerRadius && distanceBetween > bomb.innerRadius - enemy.dimensions.radius) {
+                    this.enemyBombCollision(enemy, bomb, fps);
+                }
+            });
+
+            // TODO eventually detect collision with player as well once enemies have bombs.
+        })
     }
 
-    enemyEnemyCollision(enemy1, enemy2) {
+    enemyEnemyCollision(enemy1: Enemy, enemy2: Enemy, fps: number) {
+        // TODO eventually get these to bounce off each other.
+        let first = enemy1.location;
+        let firstMass = enemy1.dimensions.width;
+        let second = enemy1.location;
+        let secondMass = enemy2.dimensions.width;
 
+        let newFirstXVel = (first.xVelocity * (firstMass - secondMass) + (2 * secondMass * second.xVelocity)) / (firstMass + secondMass);
+        let newFirstYVel = (first.yVelocity * (firstMass - secondMass) + (2 * secondMass * second.yVelocity)) / (firstMass + secondMass);
+        let newSecondXVel = (second.xVelocity * (secondMass - firstMass) + (2 * firstMass * first.xVelocity)) / (firstMass + secondMass);
+        let newSecondYVel = (second.xVelocity * (secondMass - firstMass) + (2 * firstMass * first.yVelocity)) / (firstMass + secondMass);
+
+        second.xVelocity = newFirstXVel;
+        second.yVelocity = newFirstYVel;
+        first.xVelocity = newSecondXVel;
+        first.yVelocity = newSecondYVel;
+
+    }
+
+    enemyBombCollision(enemy: Enemy, bomb: Bomb, fps: number) {
+        enemy.health -= bomb.power / fps;
+        if (enemy.health < 0) {
+            enemy.health = 0;
+        }
     }
 
     enemyProjectileCollision(enemy: Enemy, projectile: Projectile, projectileIndex: number) {

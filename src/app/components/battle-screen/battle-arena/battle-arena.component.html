@@ -2,8 +2,10 @@
     <jcx-player-battle-avatar></jcx-player-battle-avatar>
     <jcx-projectile *ngFor="let projectile of projectilesService.projectiles"
                     [projectile]="projectile">
-
     </jcx-projectile>
+    <jcx-bomb *ngFor="let bomb of projectilesService.bombs"
+              [bomb]="bomb">
+    </jcx-bomb>
     <jcx-enemy-battle-avatar *ngFor="let enemy of enemiesService.enemies" [enemy]="enemy"></jcx-enemy-battle-avatar>
 </div>
 

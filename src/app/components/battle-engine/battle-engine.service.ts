@@ -8,7 +8,7 @@ import {PowerupsService} from "../powerups-service/powerups.service";
 @Injectable()
 export class BattleEngineService {
     battleDigest = null;
-    framesPerSecond: number = 33;
+    framesPerSecond: number = 30;
     banking: boolean = false;
     bankCountdown: number;
 
@@ -41,6 +41,7 @@ export class BattleEngineService {
     }
 
     battleStep() {
+        this.powerupsService.processStep(this.framesPerSecond);
         this.playerStats.processStep(this.framesPerSecond);
         this.projectilesService.processStep(this.framesPerSecond);
         this.enemiesService.processStep(this.framesPerSecond, this.playerStats.player.location);
@@ -48,7 +49,8 @@ export class BattleEngineService {
             this.framesPerSecond,
             this.playerStats.player,
             this.enemiesService.enemies,
-            this.projectilesService.projectiles
+            this.projectilesService.projectiles,
+            this.projectilesService.bombs
         );
         if (this.playerStats.checkForDeath()) {
             this.playerStats.loseGame();

@@ -12,4 +12,5 @@ export interface Player {
     maxHealth: number;
     currency: PlayerCurrency;
     primaryProjectile: any;
+    powerups: any;
 }

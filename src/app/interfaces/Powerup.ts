@@ -4,9 +4,12 @@ export interface Powerup {
     totalUses: number;
     power: number;
     useFn: Function;
+    deactivateFn: Function;
     keyboardShortcut: string;
     description: string;
     displayName: string;
+    id: string;
+    firstCost: number;
     cost: number;
     level: number;
     duration: number;

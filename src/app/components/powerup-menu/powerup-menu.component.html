@@ -3,10 +3,11 @@
 <div class="btn-group-vertical">
     <button *ngFor="let powerup of powerupsService.powerups"
             class="btn btn-info"
-            [disabled]="powerup.remainingUses <= 0 || powerup.cost > playerStats.player.currency.points"
+            [disabled]="powerup.remainingUses <= 0 || powerup.cost > playerStats.player.currency.points || powerup.active"
             (click)="powerup.useFn(powerup)">
         <p>{{ powerup.displayName}} Lvl. {{ powerup.level }}</p>
-        <p class="extra-small-text">{{ powerup.description }} ({{powerup.keyboardShortcut}})</p>
-        <p class="extra-small-text">Points Cost: {{ powerup.cost }}</p>
+        <p class="extra-small-text">{{ powerup.description }} ({{ powerup.keyboardShortcut }})</p>
+        <p class="extra-small-text">Points Cost: {{ powerup.cost.toFixed(0) }}</p>
+        <p class="extra-small-text">Remaining Uses: {{ powerup.remainingUses }}</p>
     </button>
 </div>

@@ -1,0 +1,11 @@
+:host {
+  position: absolute;
+  pointer-events: none;
+}
+
+.bomb {
+  position: absolute;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border-style: solid;
+}

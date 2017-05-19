@@ -64,6 +64,10 @@ export class PlayerStatsService {
                 speed: 160
             },
             color: '#2EC220'
+        },
+        powerups : {
+            rapidFireBoost: 1,
+            comboBoostMultiplier: 1
         }
     };
 
@@ -91,8 +95,10 @@ export class PlayerStatsService {
         this.player.location.xVelocity = 0;
         this.player.location.yVelocity = 0;
         this.player.currency.points = 0;
+        this.player.currency.combo = this.player.currency.comboMinimum;
         this.player.health = this.player.maxHealth;
         this.player.shield.durability = this.player.shield.maxDurability;
+        this.player.powerups.rapidFireBoost = 1;
     }
 
     bankPoints() {
@@ -184,7 +190,7 @@ export class PlayerStatsService {
     }
 
     processProjectilesStep(fps: number, player: Player) {
-        player.primaryProjectile.cooldownTimer -= 1 / fps;
+        player.primaryProjectile.cooldownTimer -= (1 * player.powerups.rapidFireBoost) / fps;
         if (this.playerPrimaryFiring && this.playerAimingAtLocation && player.primaryProjectile.cooldownTimer <= 0) {
             let primaryProjectile = this.projectilesService.createProjectile(
                 player.location,

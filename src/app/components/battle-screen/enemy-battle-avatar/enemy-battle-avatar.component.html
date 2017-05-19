@@ -1,3 +1,22 @@
+<div class="enemy-health-bar-container"
+     [style.left.px]="-15"
+     [style.bottom.px]="enemy.dimensions.radius + 5">
+    <div class="progress health-progress-bar">
+        <div class="progress-bar progress-bar-success"
+             role="progressbar"
+             aria-value-min="0"
+             aria-valuemax="100"
+             [style.width]="(enemy.health / enemy.maxHealth * 100) + '%'">
+        </div>
+        <div class="progress-bar progress-bar-danger"
+             role="progressbar"
+             aria-value-min="0"
+             aria-valuemax="100"
+             [style.width]="(100 - (enemy.health / enemy.maxHealth * 100)) + '%'">
+        </div>
+    </div>
+</div>
+
 <div class="enemy-avatar"
      [style.left.px]="enemy.dimensions.radius * -1"
      [style.bottom.px]="enemy.dimensions.radius * -1"

@@ -26,6 +26,7 @@ import {GameStateService} from "./components/game-state-service/game-state.servi
 import { ArenaHubBottomContainerComponent } from './components/arena-hub-bottom-container/arena-hub-bottom-container.component';
 import { BankButtonComponent } from './components/bank-button/bank-button.component';
 import {PowerupsService} from "./components/powerups-service/powerups.service";
+import { BombComponent } from './components/battle-screen/bomb/bomb.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import {PowerupsService} from "./components/powerups-service/powerups.service";
         UpgradeMenuComponent,
         PowerupMenuComponent,
         ArenaHubBottomContainerComponent,
-        BankButtonComponent
+        BankButtonComponent,
+        BombComponent
     ],
     imports: [
         BrowserModule,

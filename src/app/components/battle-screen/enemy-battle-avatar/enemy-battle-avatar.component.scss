@@ -11,3 +11,28 @@
   box-sizing: border-box;
   z-index: 1000;
 }
+
+.enemy-health-bar-container {
+  position: absolute;
+  width: 30px;
+  pointer-events: none;
+  opacity: .4;
+}
+
+.enemy-health-bar {
+  width: 100%;
+}
+
+.health-progress-bar {
+  height: 5px;
+}
+
+.progress {
+  padding: 0;
+  margin: 0;
+}
+
+.progress-bar {
+  padding: 0;
+  margin: 0;
+}
